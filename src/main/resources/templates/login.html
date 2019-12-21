@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<title>登录</title>
+</head>
+<body>
+        <form action="login" method="post" id="form">
+         <input type="text" name="username">
+         <input type="password" name="password">
+         <img alt="" src="/createCode">
+         <input type="text" name="imageCode">
+         <input type="submit">
+         <p th:text="${error}">
+        </form>
+        <script type="text/javascript">
+          
+         /*
+         
+         var login = new Vue({
+        	  el:"#form",
+        	  data:{
+        		  user_name:'nnp',
+        		  user_password:'123',
+        		  img_url:'http://localhost:8080/img/create_img'
+        	  }
+        	  
+          })*/
+        </script>
+</body>
+</html>
