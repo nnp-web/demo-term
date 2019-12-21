@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class CustmizeAutenTicationFailuer implements AuthenticationFailureHandler {
 
 	@Override

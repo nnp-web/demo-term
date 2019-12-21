@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfigAdapt extends WebSecurityConfigurerAdapter {
-	@Autowired
+	//@Autowired
 	private CustmizeAutenTicationFailuer failuerHandler;
 	
 	@Bean
@@ -22,13 +22,14 @@ public class SecurityConfigAdapt extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.formLogin()
-		    .loginPage("/login.html")
+		    .loginPage("/login")
 		    .loginProcessingUrl("/login")
 		    .defaultSuccessUrl("/index")
-		    .usernameParameter("username").failureHandler(failuerHandler)
+		    .usernameParameter("username")//.failureHandler(failuerHandler)
+		    .failureUrl("/login?error=true")//不知道为什么重定向其他url 不起作用
 		    .and()
 		    .authorizeRequests()
-		    .antMatchers("/login.html", "/create/code").permitAll()
+		    .antMatchers("/login", "/create/code").permitAll()
 		    .anyRequest()
 		    .authenticated()
 		    .and().csrf().disable();

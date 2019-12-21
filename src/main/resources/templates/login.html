@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th = "http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script th:inline="javascript"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+       <div id="form">
+       <form action="/login" method="post">
+          <input type="text"  v-model="username" name="username">
+          <input type="password"  v-model="password" name="password">                    
+          <input type="submit">
+        </form>  
+       </div>
+      <span id="mesg" th:if="${param.error}" th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">
+      </span>
+        <script type="text/javascript">
+        //<![CDATA[
+           var ajax = new Vue({
+        	   el:"#form",
+        	   data:{
+        		   username: null,
+        		   password: null
+        	   },
+        	   methods:{
+        		  
+        		   }
+        		   
+        	   }
+           })
+           var mseage = new Vue({
+        	   el:"#mesg",
+        	   data:{
+        		   mes: null
+        	   }
+           
+           })
+         //]]>
+        </script>
+</body>
+</html>

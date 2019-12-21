@@ -1,0 +1,12 @@
+{
+  "groups": [
+    {
+      "name": "druid.mysql",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.example.demo.config.MysqlDatasourceConfig",
+      "sourceMethod": "public javax.sql.DataSource mysqlDataSource() "
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
