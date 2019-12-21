@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+       <div id="form">
+          <input type="text"  v-model="username">
+          <input type="password"  v-model="password">                    
+          <input type="button" v-on:click="jaxs" value="提交">
+       </div>
+      <div id="mesg">
+          {{mes}}
+      </div>
+        <script type="text/javascript">
+           var ajax = new Vue({
+        	   el:"#form",
+        	   data:{
+        		   username: null,
+        		   password: null
+        	   },
+        	   methods:{
+        		   jaxs:function(){
+        			   axios.post('/login','username='+ this.username + '&password=' + this.password).then(function(res){
+        				   if(res.status == 302){
+        					   windows.location.href = "/index";
+        				   }
+        				   mseage.mes = res.data
+        			   }); 
+        		   }
+        		   
+        	   }
+           })
+           var mseage = new Vue({
+        	   el:"#mesg",
+        	   data:{
+        		   mes: null
+        	   }
+           
+           })
+        </script>
+</body>
+</html>
