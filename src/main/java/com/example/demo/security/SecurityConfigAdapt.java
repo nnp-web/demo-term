@@ -1,6 +1,5 @@
 package com.example.demo.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,20 +18,20 @@ public class SecurityConfigAdapt extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
-		http.formLogin()
+	protected void configure(HttpSecurity http) throws Exception {	
+		http.csrf().disable()
+		    .formLogin()
 		    .loginPage("/login")
 		    .loginProcessingUrl("/login")
-		    .defaultSuccessUrl("/index")
 		    .usernameParameter("username")//.failureHandler(failuerHandler)
+		    .successForwardUrl("/tomain")//使用defualtSuccsessUrl重定向有时失败？
 		    .failureUrl("/login?error=true")//不知道为什么重定向其他url 不起作用
 		    .and()
 		    .authorizeRequests()
 		    .antMatchers("/login", "/create/code").permitAll()
 		    .anyRequest()
-		    .authenticated()
-		    .and().csrf().disable();
+		    .authenticated();
+
 		    
 	}
 	

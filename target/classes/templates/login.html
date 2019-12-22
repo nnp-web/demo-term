@@ -10,6 +10,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 </head>
 <body>
+       <div th:include="head::compnonen"></div>
        <div id="form">
        <form action="/login" method="post">
           <input type="text"  v-model="username" name="username">
@@ -42,5 +43,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
            })
          //]]>
         </script>
+        <div th:include="head::version"></div>
 </body>
 </html>
