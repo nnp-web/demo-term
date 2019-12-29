@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -20,12 +21,25 @@ public class Sysuser implements UserDetails, Serializable{
     
     private String password;
     
-    private List<Sysroler> sysRolers;
+    
+    private String[] sysRolers;
+    
+    private String gender;
+    
+    private Date create_time;
     
 	public int getId() {
 		return id;
 	}
 	
+	public Sysuser() {
+		
+	}
+	
+    public Sysuser(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 	@Override
 	public String toString() {
 		return "Sysuser [id=" + id + ", username=" + username + "]";
@@ -35,11 +49,11 @@ public class Sysuser implements UserDetails, Serializable{
 		this.id = id;
 	}
 	
-	public List<Sysroler> getSysRolers() {
+	public String[] getSysRolers() {
 		return sysRolers;
 	}
 	
-	public void setSysRolers(List<Sysroler> sysRolers) {
+	public void setSysRolers(String[] sysRolers) {
 		this.sysRolers = sysRolers;
 	}
 	
@@ -54,14 +68,12 @@ public class Sysuser implements UserDetails, Serializable{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		StringBuilder builder = new StringBuilder();
 		if(this.sysRolers == null) {
+			
 			return AuthorityUtils.commaSeparatedStringToAuthorityList("");
 		}
-		for(Sysroler sysroler : this.getSysRolers()) {
-			builder.append(sysroler.getRoleName()).append(",");
-		}
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(builder.substring(0, builder.length()-1));
+		
+		return AuthorityUtils.createAuthorityList(sysRolers);
 
 	}
 	
@@ -99,6 +111,25 @@ public class Sysuser implements UserDetails, Serializable{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 
 }

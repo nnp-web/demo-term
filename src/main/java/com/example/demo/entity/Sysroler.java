@@ -13,8 +13,7 @@ public class Sysroler implements Serializable{
 	
 	private String roleName;
 	
-	private int user_id;
-
+	
 	public int getRole_id() {
 		return role_id;
 	}
@@ -31,18 +30,12 @@ public class Sysroler implements Serializable{
 		this.roleName = roleName;
 	}
 
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
 	@Override
 	public String toString() {
-		return "Sysroler [role_id=" + role_id + ", roleName=" + roleName + ", user_id=" + user_id + "]";
+		return "Sysroler [role_id=" + role_id + ", roleName=" + roleName + "]";
 	}
+
+
 	
 	
 	
