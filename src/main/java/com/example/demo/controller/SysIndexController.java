@@ -2,22 +2,21 @@ package com.example.demo.controller;
 
 
 
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexController {
+public class SysIndexController {
 
-	@RequestMapping("/tomain")
+	@RequestMapping("/index")
 	public String enterIndex() {
-		return "indexs";
+		return "System/indexs";
 	}
 	
 	@RequestMapping("/login")
 	public String enterLoginPage() {
-		return "login";
+		return "System/login";
 	}
 	
 }

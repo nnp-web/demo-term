@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/grid.locale-cn.js"></script>
+<script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-ui.js"></script>
+</head>
+<body>
+	<table id="list"></table>
+	<script type="text/javascript">
+		$("#list").jqGrid({
+			url : '/sys/menu/findAll',//请求数据的地址  
+			datatype : "json",
+			viewrecords : true,
+			height : 385,
+			rowNum : 10,
+			rowList : [ 10, 30, 50 ],
+			rownumbers : true,
+			rownumWidth : 25,
+			autowidth : true,
+			multiselect : true,
+			loadonce : true,
+			colNames : [ 'Id', '菜单名称', '菜单链接' ],
+			//jqgrid主要通过下面的索引信息与后台传过来的值对应  
+			colModel : [ {
+				name : 'id',
+				index : 'id',
+				width : 55
+			}, {
+				name : 'menuname',
+				index : 'menuname',
+				width : 90
+			}, {
+				name : 'url',
+				index : 'url',
+				width : 100
+			} ],
+			caption : "我是jqgrid的标题",
+		});
+	</script>
+</body>
+</html>

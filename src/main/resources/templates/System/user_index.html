@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.css">
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/grid.locale-cn.js"></script>
+<script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-ui.js"></script>
+<title>用户管理</title>
+
+</head>
+<body>
+      <table id="list"></table>
+	<script type="text/javascript">
+		$("#list").jqGrid({
+			url : '/sys/user/findAll',//请求数据的地址  
+			datatype : "json",
+			viewrecords : true,
+			height : 385,
+			rowNum : 10,
+			rowList : [ 10, 30, 50 ],
+			rownumbers : true,
+			rownumWidth : 25,
+			autowidth : true,
+			multiselect : true,
+			loadonce : true,
+			colNames : [ 'Id', '用户名', '密码', '性别', '创建日期'],
+			//jqgrid主要通过下面的索引信息与后台传过来的值对应  
+			colModel : [ {
+				name : 'id',
+				index : 'id',
+				width : 55
+			}, {
+				name : 'username',
+				index : 'username',
+				width : 90
+			}, {
+				name : 'password',
+				index : 'password',
+				width : 100
+			} ,{
+				name : 'gender',
+				index : 'gender',
+				width : 100
+			},{
+				name : 'create_time',
+				index : 'create_time',
+				width : 100
+			} ],
+			caption : "用户列表",
+		});
+	</script>
+</body>
+</html>

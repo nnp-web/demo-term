@@ -11,8 +11,9 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class MyAccessDecisionManagerImp implements AccessDecisionManager {
 
 	@Override
@@ -23,7 +24,7 @@ public class MyAccessDecisionManagerImp implements AccessDecisionManager {
 		
 		while(it.hasNext()) {
 			ConfigAttribute resourceAttr = it.next();
-			String resourceRole = "ROLE_" +  resourceAttr.getAttribute();
+			String resourceRole =  resourceAttr.getAttribute();
 			
 			for(GrantedAuthority userAuth : authentication.getAuthorities()) {
 				

@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -12,4 +14,6 @@ public interface SysuserMapper {
 	Sysuser findByUserName(String username);
     @Insert("insert into user(username, password)values(#{username}, #{password})")
     void insertUser(Sysuser user);
+    @Select("select u.id, u.username, u.password, u.gender,u.create_time from user u ")
+   	List<Sysuser> findAll();
 }

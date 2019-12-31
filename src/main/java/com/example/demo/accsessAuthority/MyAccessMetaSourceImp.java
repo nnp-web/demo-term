@@ -18,13 +18,14 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.SysMenu;
 import com.example.demo.mapper.SysMenuMapper;
 import com.example.demo.mapper.SysroleMenuMapper;
 import com.example.demo.mapper.SysrolerMapper;
 
-@Component
+@Service
 public class MyAccessMetaSourceImp implements FilterInvocationSecurityMetadataSource {
 
 	private Map<RequestMatcher, Collection<ConfigAttribute>> map = new HashMap<RequestMatcher, Collection<ConfigAttribute>>();
@@ -40,10 +41,9 @@ public class MyAccessMetaSourceImp implements FilterInvocationSecurityMetadataSo
 
 	@PostConstruct
 	public void loadSecurityMetaSource() {
-		List<SysMenu> menuList = sysMenuMapper.findAll();
-		Collection<ConfigAttribute> attribute = new ArrayList<ConfigAttribute>();
-		
+		List<SysMenu> menuList = sysMenuMapper.findAll();	
 		for (SysMenu menu : menuList) {
+			Collection<ConfigAttribute> attribute = new ArrayList<ConfigAttribute>();
 			String url = menu .getUrl();
 			String method = menu .getMethod();
 			List<Integer> rolerId = sysroleMenuMapper.findRoleIdByMenuId(menu.getId());
@@ -58,7 +58,7 @@ public class MyAccessMetaSourceImp implements FilterInvocationSecurityMetadataSo
 				attribute.add(new SecurityConfig(roler));
 			}
 			
-			attribute.add(new SecurityConfig("@needAuth"));
+			//attribute.add(new SecurityConfig("@needAuth"));
 			map.put(requestMather, attribute);
 		}
 	}
@@ -74,7 +74,7 @@ public class MyAccessMetaSourceImp implements FilterInvocationSecurityMetadataSo
 		for (Entry<RequestMatcher, Collection<ConfigAttribute>> mather : map.entrySet()) {
 			
 			if (mather.getKey().matches(request)) {
-				
+				Collection<ConfigAttribute> c = mather.getValue();
 				return mather.getValue();
 			}
 		}

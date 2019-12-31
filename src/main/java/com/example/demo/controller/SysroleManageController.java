@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SysroleManageController {
 	@RequestMapping("/list")
 	public String touser() {
-		return "role_index";
+		return "System/role_index";
 	}
 
 }
