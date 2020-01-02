@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" >
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
@@ -11,10 +9,23 @@
 <script type="text/javascript" src="../../js/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="../../js/jquery-ui.js"></script>
 <title>用户管理</title>
-
+<script type="text/javascript" src="../../js/layer.js"></script>
 </head>
 <body>
-      <table id="list"></table>
+    <div id="copy" style="display: none;">
+       <form action="/sys/user/add" method="post">
+       <input name="username" type="text" value="username">
+       <input name="password" type="password" value="password">
+       <select name="gender">
+        <option value="1">男</option>
+        <option value="2">女</option>
+       </select>
+       <input type="submit" value="提交">
+       </form>
+    </div>
+	<div id="nav"></div>
+	<table id="list"></table>
+	<div id="page"></div>
 	<script type="text/javascript">
 		$("#list").jqGrid({
 			url : '/sys/user/findAll',//请求数据的地址  
@@ -28,7 +39,8 @@
 			autowidth : true,
 			multiselect : true,
 			loadonce : true,
-			colNames : [ 'Id', '用户名', '密码', '性别', '创建日期'],
+			pager : "#page",
+			colNames : [ 'Id', '用户名', '密码', '性别', '角色', '创建日期'],
 			//jqgrid主要通过下面的索引信息与后台传过来的值对应  
 			colModel : [ {
 				name : 'id',
@@ -49,10 +61,30 @@
 			},{
 				name : 'create_time',
 				index : 'create_time',
-				width : 100
+				width : 100,
+				formatter:'date',
+				formatoptions: {newformat:'Y-m-d h:i:s'}
 			} ],
-			caption : "用户列表",
-		});
+			caption : "用户列表"			
+		})
+   $("#list").jqGrid("navGrid", "#page", { 
+	   edit:true, 
+	   add:true, 
+	   del:true, 
+	   addfunc : function(){
+		   layer.open({
+			   type:1,
+			   title:"新增用户",
+			   area: ['630px', '360px'],
+			   content:$("#copy").html(),
+		   })
+	   },
+	   //editfunc :
+	   //delfunc :
+	   alerttext : "请选择需要操作的数据行!"
+   }	   
+   );
+
 	</script>
 </body>
 </html>

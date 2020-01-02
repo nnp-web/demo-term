@@ -40,9 +40,11 @@ public class Sysuser implements UserDetails, Serializable{
 		this.username = username;
 		this.password = password;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Sysuser [id=" + id + ", username=" + username + "]";
+		return "Sysuser [username=" + username + ", password=" + password + ", gender=" + gender + "]";
 	}
 
 	public void setId(int id) {
